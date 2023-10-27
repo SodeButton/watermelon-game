@@ -27,13 +27,11 @@ export default class TestScene extends Phaser.Scene {
     // const shapes = this.cache.json.get("shapes");
     const scene = this;
 
-    console.log(this.game.config.maxWidth, this.game.config.maxHeight);
-
     this.matter.world.setBounds(
       0,
       0,
-      Number(this.game.config.width),
-      Number(this.game.config.height)
+      this.sys.canvas.width,
+      this.sys.canvas.height
     );
 
     this.input.on(

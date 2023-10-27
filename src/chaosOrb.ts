@@ -9,6 +9,7 @@ export default class ChaosOrb extends Currency {
     scene.add.existing(this);
     this.setCollisionGroup(1);
     this.name = "chaos_orb";
+    this.createVerts();
   }
 
   public update(...args: any[]): void {
