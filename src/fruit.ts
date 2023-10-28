@@ -15,7 +15,6 @@ enum FruitType {
 export default class Fruit extends Phaser.Physics.Matter.Image {
   private readonly fruitType: FruitType;
   constructor(
-    this: Fruit,
     world: Phaser.Physics.Matter.World,
     x: number,
     y: number,
