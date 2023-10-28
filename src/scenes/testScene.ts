@@ -12,7 +12,7 @@ export default class TestScene extends Phaser.Scene {
     this.load.image("fruit", imgFruit);
   }
 
-  create(this: Phaser.Scene): void {
+  create(): void {
     const world = this.matter.world;
     this.matter.world.setBounds(
       0,
@@ -26,7 +26,7 @@ export default class TestScene extends Phaser.Scene {
     this.input.on(
       "pointerdown",
       function (pointer: Phaser.Input.Pointer) {
-        new Fruit(world, pointer.x, pointer.y, 1, 0);
+        new Fruit(world, pointer.x, pointer.y, 1, Phaser.Math.Between(0, 4));
       },
       this
     );
