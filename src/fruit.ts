@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import * as Phaser from "phaser";
 enum FruitType {
   Cherry,
   Strawberry,
@@ -12,14 +12,21 @@ enum FruitType {
   Melon,
   Watermelon,
 }
-export default class Fruit extends Phaser.Physics.Matter.Sprite {
+export default class Fruit extends Phaser.Physics.Matter.Image {
   private readonly fruitType: FruitType;
-  constructor(world, x, y, size, fruitType: FruitType) {
+  constructor(
+    this: Fruit,
+    world: Phaser.Physics.Matter.World,
+    x: number,
+    y: number,
+    size: number,
+    fruitType: FruitType
+  ) {
     super(world, x, y, "fruit", 0, {
       shape: "circle",
       label: "fruit_" + fruitType.toString(),
     });
-    world.scene.add.existing(this);
+    this.scene.add.existing(this);
     this.setCollisionCategory(1);
     this.setScale(size * 0.5);
     this.setTint(0xff0000);

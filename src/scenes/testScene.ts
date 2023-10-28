@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import * as Phaser from "phaser";
 
 import Fruit from "../fruit";
 import imgFruit from "../assets/circle.png";
@@ -12,7 +12,8 @@ export default class TestScene extends Phaser.Scene {
     this.load.image("fruit", imgFruit);
   }
 
-  create(): void {
+  create(this: Phaser.Scene): void {
+    const world = this.matter.world;
     this.matter.world.setBounds(
       0,
       0,
@@ -25,7 +26,7 @@ export default class TestScene extends Phaser.Scene {
     this.input.on(
       "pointerdown",
       function (pointer: Phaser.Input.Pointer) {
-        new Fruit(this.matter.world, pointer.x, pointer.y, 1, 0);
+        new Fruit(world, pointer.x, pointer.y, 1, 0);
       },
       this
     );
