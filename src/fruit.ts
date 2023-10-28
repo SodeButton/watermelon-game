@@ -25,7 +25,7 @@ export default class Fruit extends Phaser.Physics.Matter.Image {
       shape: "circle",
       label: "fruit_" + fruitType.toString(),
     });
-    this.scene.add.existing(this);
+    this.scene.add.existing(this as Fruit);
     this.setCollisionCategory(1);
     this.setScale(size * 0.5);
     this.setTint(0xff0000);
