@@ -1,13 +1,7 @@
-import Phaser from "phaser";
+import * as Phaser from "phaser";
 
-import img_chaos_orb from "/src/img/chaos_orb.png";
-import img_ex_orb from "/src/img/exalted_orb.png";
-import img_div_orb from "/src/img/divine_orb.png";
-import img_mirror from "/src/img/mirror.png";
-
-import shape_currency from "/src/img/currency.json";
-
-import ChaosOrb from "../chaosOrb.ts";
+import Fruit from "../fruit";
+import imgFruit from "../assets/circle.png";
 
 export default class TestScene extends Phaser.Scene {
   constructor() {
@@ -15,47 +9,26 @@ export default class TestScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("chaos_orb", img_chaos_orb);
-    this.load.image("ex_orb", img_ex_orb);
-    this.load.image("div_orb", img_div_orb);
-    this.load.image("mirror", img_mirror);
-
-    this.load.json("shapes", shape_currency);
+    this.load.image("fruit", imgFruit);
   }
 
   create(): void {
-    // const shapes = this.cache.json.get("shapes");
-    const scene = this;
-
+    const world = this.matter.world;
     this.matter.world.setBounds(
       0,
       0,
       this.sys.canvas.width,
       this.sys.canvas.height
     );
+    this.matter.world.update60Hz();
+    this.matter.set60Hz();
 
     this.input.on(
       "pointerdown",
       function (pointer: Phaser.Input.Pointer) {
-        new ChaosOrb(scene, pointer.x, pointer.y);
+        new Fruit(world, pointer.x, pointer.y, 1, Phaser.Math.Between(0, 4));
       },
       this
     );
-
-    // this.matter.world.on("collisionstart", function (event, bodyA, bodyB) {
-    //   console.log("collisionstart", bodyA, bodyB);
-    //   if (bodyA.gameObject === null) return;
-    //   if (bodyA.gameObject.label === bodyB?.gameObject.label) {
-    //     const x = (bodyA.position.x + bodyB.position.x) / 2;
-    //     const y = (bodyA.position.y + bodyB.position.y) / 2;
-    //     const ex_ob = this.scene.matter.add.image(x, y, "ex_orb", 0, {
-    //       shape: shapes.exalted_orb,
-    //     });
-    //     ex_ob.setCollisionGroup(2);
-    //     ex_ob.label = "exalted_orb";
-    //     bodyA.gameObject.destroy();
-    //     bodyB.gameObject.destroy();
-    //   }
-    // });
   }
 }
